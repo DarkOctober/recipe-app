@@ -1,0 +1,513 @@
+/* ================================
+   THEME VARIABLES
+   ================================ */
+
+/* Smooth transitions for theme switching (updated) */
+body,
+html,
+.theme-toggle,
+button,
+input,
+select,
+.recipe-card,
+.recipe-detail,
+.health-tags span,
+.pagination button {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              box-shadow 0.3s ease,
+              filter 0.3s ease;
+}
+
+/* Ensure .theme-toggle background updates smoothly */
+.theme-toggle {
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+}
+
+/* Light Theme (default) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --card-bg: #f9f9f9;
+  --card-shadow: rgba(0,0,0,0.1);
+  --primary-color: #3498db;
+  --button-bg: var(--primary-color);
+  --button-text: #ffffff;
+  --tag-bg: #eee;
+  --tag-text: #222;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #f5f5f5;
+  --card-bg: #2c2c2c;
+  --card-shadow: rgba(0,0,0,0.5);
+  --primary-color: #2980b9;
+  --button-bg: var(--primary-color);
+  --button-text: #ffffff;
+  --tag-bg: #444;
+  --tag-text: #f5f5f5;
+}
+
+.back-button-wrapper {
+ --bg-color: transparent; /* Ensure sticky button doesn't have a colored background*/
+}
+
+/* ================================
+   GLOBAL STYLES
+   ================================ */
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Sansation", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  margin: 0 0 10px 0;
+}
+
+/* Buttons */
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 6px 12px;
+  transition: background 0.2s, filter 0.2s;
+  font-family: "Sansation", sans-serif;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Links (if any) */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ================================
+   HOME PAGE
+   ================================ */
+
+.home-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-controls input,
+.search-controls select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: "Sansation", sans-serif;
+}
+
+.search-controls button {
+  padding: 8px 16px;
+  font-family: "Sansation", sans-serif;
+}
+
+.loading-text {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.pagination-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ================================
+   RECIPE CARD
+   ================================ */
+
+.recipe-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 5px var(--card-shadow);
+}
+
+.recipe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.recipe-card h3 {
+  padding: 10px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+/* ================================
+   FADE-IN ANIMATION FOR RECIPE CARDS
+   ================================ */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   PAGINATION
+   ================================ */
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #ddd;
+}
+
+/* ================================
+   RECIPE DETAIL
+   ================================ */
+
+.recipe-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.recipe-detail img {
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.health-tags {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.health-tags span {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.9em;
+}
+
+.recipe-detail ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.recipe-detail div[ v-html] {
+  margin-bottom: 15px;
+}
+
+.loading-text,
+.error-text {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.error-text {
+  color: red;
+}
+
+/* Recipe Nutrition List */
+.nutrition-list {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.nutrition-list li {
+  margin-bottom: 5px;
+}
+
+/* Ingredient List with Images */
+.ingredient-list {
+  list-style: none; /* remove bullets */
+  padding: 0;
+  margin: 0;
+}
+
+.ingredient-item {
+  margin-bottom: 12px; /* space between ingredients */
+}
+
+.ingredient-content {
+  display: flex;
+  align-items: center; /* vertically center text with image */
+  gap: 10px; /* space between image and text */
+}
+
+.ingredient-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px; /* optional: rounded corners */
+}
+
+.ingredient-text {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Sticky Back Button */
+.back-button-wrapper {
+  position: sticky;      /* Stick to the top */
+  top: 10px;             /* Slight spacing from top */
+  z-index: 100;          /* Stay above content */
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 0;
+  background-color: var(--bg-color); /* Match theme */
+  transition: background-color 0.3s ease;
+}
+
+/* Sticky Back Button Wrapper */
+.back-button-wrapper {
+  position: sticky;      /* stick to top */
+  top: 10px;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 0;
+  background-color: var(--bg-color); /* match page background to hide "line" */
+  /* Optional: semi-transparent for smooth overlay */
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  transition: background-color 0.3s ease;
+}
+
+.back-button-wrapper button {
+  background-color: silver;   /* button itself is transparent */
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+[data-theme="dark"] .back-button-wrapper button {
+  background-color: #2c2c2c;
+}
+
+.back-button-wrapper button:hover {
+  background-color: var(--primary-color);
+  color: var(--button-text);
+  transform: translateY(-2px);
+}
+
+/* Optional fade-in effect for the sticky button */
+.back-button-wrapper {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ================================
+   THEME TOGGLE BUTTON
+   ================================ */
+
+.theme-toggle {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  background-color: var(--bg-color);
+}
+
+/* The switch background */
+.switch {
+  width: 60px;
+  height: 30px;
+  background: #ccc;
+  border-radius: 30px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.4s ease;
+}
+
+/* Dark mode background */
+.switch.dark {
+  background: #555;
+}
+
+/* The sliding knob */
+.toggle-ball {
+  width: 26px;
+  height: 26px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.4s ease, background 0.4s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Move knob to the right in dark mode */
+.switch.dark .toggle-ball {
+  left: 32px; /* 60px width - 26px knob - 2px offset */
+  background: #222;
+}
+
+/* Icon inside the knob */
+.toggle-ball .icon {
+  width: 20px;
+  height: 20px;
+  color: #f39c12; /* sun color */
+  transition: transform 0.4s ease, color 0.4s ease;
+}
+
+.switch.dark .toggle-ball .icon {
+  color: #51738e; /* moon color */
+  transform: rotate(180deg);
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 600px) {
+  .search-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-controls input,
+  .search-controls select,
+  .search-controls button {
+    width: 100%;
+  }
+}
+
+/* ================================
+   SKELETON LOADING
+   ================================ */
+
+.skeleton-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: pulse 1.5s infinite;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(
+    90deg,
+    #e0e0e0 25%,
+    #f0f0f0 50%,
+    #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+}
+
+.skeleton-title {
+  height: 20px;
+  margin: 10px;
+  background: linear-gradient(
+    90deg,
+    #e0e0e0 25%,
+    #f0f0f0 50%,
+    #e0e0e0 75%
+  );
+  background-size: 200% 100%;
+  border-radius: 4px;
+}
+
+/* Pulse animation for shimmer effect */
+@keyframes pulse {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+[data-theme="dark"] .skeleton-card {
+  background-color: #2c2c2c;
+}
+
+[data-theme="dark"] .skeleton-image,
+[data-theme="dark"] .skeleton-title {
+  background: linear-gradient(
+    90deg,
+    #3a3a3a 25%,
+    #4a4a4a 50%,
+    #3a3a3a 75%
+  );
+}

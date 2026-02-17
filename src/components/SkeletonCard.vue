@@ -1,0 +1,10 @@
+<template>
+  <div class="skeleton-card">
+    <div class="skeleton-image"></div>
+    <div class="skeleton-title"></div>
+  </div>
+</template>
+
+<script setup>
+// No script needed for static skeleton
+</script>
